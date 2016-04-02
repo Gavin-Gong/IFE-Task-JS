@@ -35,9 +35,20 @@
      * 返回一个数组，格式见函数中示例
      */
     function getData() {
-        /*
-         coding here
-         */
+        var dataList = document.getElementById("source").getElementsByTagName("li");
+        for (var i = 0; i < dataList.length; i++) {
+            // 神奇的二维数组
+            var dataCity = [];
+            var dataQuality = [];
+            var data = [];
+            for (var a = 0; a < dataList.length; a++) {
+                dataCity[a] = dataList[a].innerText.slice(0, 2);
+                dataQuality[a] = Number(dataList[a].getElementsByTagName("b")[0].innerText); //string2number
+                data[a] = [dataCity[a], dataQuality[a]];
+            }
+
+        }
+
 
         /*
          data = [
@@ -57,7 +68,9 @@
      * 返回一个排序后的数组
      */
     function sortAqiData(data) {
-
+        return data.sort(function(a, b) {
+            return parseInt(a[1]) < parseInt(b[1]);
+        })
     }
 
     /**
@@ -66,6 +79,10 @@
      * 格式见ul中的注释的部分
      */
     function render(data) {
+        var resortList = document.getElementById("resort");
+        for (var k=0; k<data.length; k++) {
+            resortList.innerHTML += '<li>第' + (k+1) +'名: ' + data[k][0] + '空气质量: ' + '<b>' + data[k][1] + '</b></li>';
+        }
 
     }
 
@@ -73,13 +90,15 @@
         var aqiData = getData();
         aqiData = sortAqiData(aqiData);
         render(aqiData);
+        console.log("click");
     }
 
 
     function init() {
 
         // 在这下面给sort-btn绑定一个点击事件，点击时触发btnHandle函数
-
+//        document.getElementById("sort-btn").addEventListener('click', btnHandle);
+        document.getElementById("sort-btn").onclick = btnHandle; //为什么不能加括号
     }
 
     init();

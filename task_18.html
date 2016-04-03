@@ -5,7 +5,12 @@
     <title>Task-18</title>
     <style>
         #result div {
+            display: inline-block;
             padding: 10px;
+            margin-left: 5px;
+            margin-top: 20px;
+            /*width: 20px;*/
+            height: 20px;
             text-align: center;
             color: #eee;
             background-color: #f44336;
@@ -27,6 +32,60 @@
     };
 
     var data = [];
+    var leftInputBtn = $('#leftInput');
+    var rightInputBtn = $('#rightInput');
+    var leftDelBtn = $('#leftDel');
+    var rightDelBtn = $('#rightDel');
+    var resultDiv = $('#result');
+
+    function getInputVal() {
+        return $('#inputArea').value;
+    }
+    function leftInsert() {
+        if(data) {
+            data.unshift(getInputVal());
+            render()
+        }
+    }
+    function rightInsert() {
+        data.push(getInputVal());
+        render();
+    }
+    function leftPop() {
+        if(data) {
+            data.shift(data[0]);
+            render()
+        } else {
+            alert("No Element");
+        }
+    }
+    function rightPop() {
+        if(data) {
+            data.pop(data[data.length - 1]);
+            render()
+        } else {
+            alert("No Element");
+        }
+    }
+
+    function render() {
+        if(data) {
+            resultDiv.innerHTML = "";
+            for(var i = 0; i < data.length; i++) {
+                resultDiv.innerHTML += "<div>" + data[i] + "</div>";
+            }
+        }
+    }
+    function addHandler() {
+        leftInputBtn.addEventListener('click', leftInsert);
+        rightInputBtn.addEventListener('click', rightInsert);
+        leftDelBtn.addEventListener('click', leftPop);
+        rightDelBtn.addEventListener('click', rightPop);
+    }
+    addHandler();
+
+
+
 
 </script>
 </body>

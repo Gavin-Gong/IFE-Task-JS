@@ -52,16 +52,18 @@
         render();
     }
     function leftPop() {
-        if(data) {
+        if(data.length) {
             data.shift(data[0]);
-            render()
+            console.log(data.length);
+            render();
         } else {
             alert("No Element");
         }
     }
     function rightPop() {
-        if(data) {
+        if(data.length) {
             data.pop(data[data.length - 1]);
+            console.log(data.length);
             render()
         } else {
             alert("No Element");

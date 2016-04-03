@@ -15,12 +15,13 @@ var aqiData = {};
 function addAqiData() {
     var cityName = document.getElementById("aqi-city-input").value.trim();
     var quaValue = document.getElementById("aqi-value-input").value.trim();
-    //if(!cityName.match(/sa/)) {
+    //if(!cityName.match(//)) {
     //    alert("骚年郎,你输入错误哦")
     //}
-    //if(!quaValue.match(/sa/)) {
-    //    alert("骚年郎,你输入错误哦")
-    //}
+    if(!quaValue.match(/^\d+$/)) {
+        alert("骚年郎,你输入错误哦");
+        return;
+    }
 
     aqiData[cityName] = quaValue;
     console.log(aqiData);
@@ -38,7 +39,7 @@ function renderAqiList() {
     for(var cityName in aqiData) {
         table.innerHTML += "<tr><td>" + cityName + "</td><td>" + aqiData[cityName] + "</td><td><button class='del-btn'>删除</button></td></tr>"
     }
-    init();
+    init();//形成循环调用...
 }
 
 /**

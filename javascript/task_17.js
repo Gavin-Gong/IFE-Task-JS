@@ -132,7 +132,7 @@ function initAqiChartData() {
 
         //Day
         chartData[key].day = aqiSourceData[key];
-        console.log(chartData[key].day);
+        //console.log(chartData[key].day);
 
         //Month
         for(var i = 1; i<=3; i++) {
@@ -161,12 +161,14 @@ function initAqiChartData() {
 
             weekCount++;
 
-            if(!weekCount % 7) {
+            if(!(weekCount % 7)) {
                 weekNum++;
                 weekArray.push(weekNum);
-                console.log(weekArray);
-                //chartData[key].week.[weekArray] = Math.ceil(weekSum/7);
+                //console.log(weekArray);
+                chartData[key].week[weekArray[weekNum]] = Math.ceil(weekSum/7);
                 //chartData[key].week = {weekArray[weekNum]: Math.ceil(weekSum/7)}
+                console.log(chartData[key].week[weekArray[weekNum]]);
+                weekSum = 0;
             }
 
         }

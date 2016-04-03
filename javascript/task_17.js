@@ -24,7 +24,7 @@ function getDateStr(dat) {
 function randomBuildData(seed) {
     var returnData = {};
     var dat = new Date("2016-01-01");
-    var datStr = ''
+    var datStr = '';
     for (var i = 1; i < 92; i++) {
         datStr = getDateStr(dat);
         returnData[datStr] = Math.ceil(Math.random() * seed);
@@ -127,6 +127,55 @@ function initCitySelector() {
 function initAqiChartData() {
     // 将原始的源数据处理成图表需要的数据格式
     // 处理好的数据存到 chartData 中
+    for(var key in aqiSourceData) {
+        chartData[key] = {"day":{}, "week": {}, "month": {"1":0, "2": 0, "3": 0}};
+
+        //Day
+        chartData[key].day = aqiSourceData[key];
+        console.log(chartData[key].day);
+
+        //Month
+        for(var i = 1; i<=3; i++) {
+            var monthReg = new RegExp("2016-0" + i +"-\\d{2}"),
+                monthSum = 0,
+                count = 0;
+
+            for(var daykey in chartData[key].day) {
+                if(monthReg.test(daykey)) {
+                    monthSum += chartData[key].day[daykey];
+                    count++;
+                }
+            }
+            chartData[key].month[i] = Math.ceil(monthSum/count);
+        }
+
+        //Week
+        var weekNum = 0;
+        var weekSum = 0;
+        var weekCount = 0;
+        var weekArray = [];
+        for(var time in chartData[key].day) {
+            //console.log(chartData[key].day[time]);
+
+            weekSum += chartData[key].day[time];
+
+            weekCount++;
+
+            if(!weekCount % 7) {
+                weekNum++;
+                weekArray.push(weekNum);
+                console.log(weekArray);
+                //chartData[key].week.[weekArray] = Math.ceil(weekSum/7);
+                //chartData[key].week = {weekArray[weekNum]: Math.ceil(weekSum/7)}
+            }
+
+        }
+        console.log(chartData[key].week);
+
+
+    }
+
+
 }
 
 /**

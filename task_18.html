@@ -39,15 +39,23 @@
     var resultDiv = $('#result');
 
     function getInputVal() {
-        return $('#inputArea').value;
+        var inputVal = $('#inputArea').value;
+        var NumReg = /^\d*$/;
+        if(inputVal.match(NumReg)){
+            return inputVal;
+        } else {
+            alert("Not a number!");
+        }
+
     }
     function leftInsert() {
-        if(data) {
+        if(data.length) {
             data.unshift(getInputVal());
             render()
         }
     }
     function rightInsert() {
+        if(data.length)
         data.push(getInputVal());
         render();
     }

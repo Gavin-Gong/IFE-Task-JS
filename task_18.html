@@ -27,11 +27,11 @@
 <div id="result"></div>
 
 <script>
-
+    //类似Jq的选择器
     $ = function(el) {
         return document.querySelector(el);
     };
-
+    //定义数据, 数组, 左插入按钮, 右插入按钮, 左删除按钮, 右删除按钮
     var data = [];
     var leftInputBtn = $('#leftInput');
     var rightInputBtn = $('#rightInput');
@@ -39,29 +39,35 @@
     var rightDelBtn = $('#rightDel');
     var resultDiv = $('#result');
 
+    //获取文本框输入数据
     function getInputVal() {
-        var numReg = /^\d*$/;
+        var numReg = /^\d*$/; //数字正则
         var inputVal = $('#inputArea').value;
 //        console.log(typeof inputVal);
         console.log(numReg.test(inputVal));
+        //筛选数字输入
         if(numReg.test(inputVal)) {
             return inputVal;
         }else {
             alert("not a number");
         }
     }
+
+    //左插入
     function leftInsert() {
         if(getInputVal()) {
             data.unshift(getInputVal());
             render()
         }
     }
+    //右插入
     function rightInsert() {
         if(getInputVal()) {
             data.push(getInputVal());
             render();
         }
     }
+    //左删除
     function leftPop() {
         if(data.length) {
             var shiftEle = data.shift(data[0]);
@@ -72,6 +78,7 @@
             alert("No Element");
         }
     }
+    //右删除
     function rightPop() {
         if(data.length) {
             var popEle = data.pop(data[data.length - 1]);
@@ -82,7 +89,7 @@
             alert("No Element");
         }
     }
-
+    //渲染矩形列队
     function render() {
         if(data) {
             resultDiv.innerHTML = "";
@@ -91,6 +98,7 @@
             }
         }
     }
+    //添加事件函数
     function addHandler() {
         leftInputBtn.addEventListener('click', leftInsert);
         rightInputBtn.addEventListener('click', rightInsert);

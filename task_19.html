@@ -58,7 +58,7 @@
     }
     //获取文本框输入数据
     function getInputVal() {
-        var numReg = /^(?:[1-9]\d|100)$/; //数字正则
+        var numReg = /^100$|^[1-9][0-9]$/; //数字正则, ^(?:[1-9]\d|100)$
         var inputVal = $('#inputArea').value;
 //        console.log(typeof inputVal);
         console.log(numReg.test(inputVal));

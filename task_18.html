@@ -27,6 +27,7 @@
 <div id="result"></div>
 
 <script>
+
     $ = function(el) {
         return document.querySelector(el);
     };
@@ -39,25 +40,27 @@
     var resultDiv = $('#result');
 
     function getInputVal() {
+        var numReg = /^\d*$/;
         var inputVal = $('#inputArea').value;
-        var NumReg = /^\d*$/;
-        if(inputVal.match(NumReg)){
+//        console.log(typeof inputVal);
+        console.log(numReg.test(inputVal));
+        if(numReg.test(inputVal)) {
             return inputVal;
-        } else {
-            alert("Not a number!");
+        }else {
+            alert("not a number");
         }
-
     }
     function leftInsert() {
-        if(data.length) {
+        if(getInputVal()) {
             data.unshift(getInputVal());
             render()
         }
     }
     function rightInsert() {
-        if(data.length)
-        data.push(getInputVal());
-        render();
+        if(getInputVal()) {
+            data.push(getInputVal());
+            render();
+        }
     }
     function leftPop() {
         if(data.length) {

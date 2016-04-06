@@ -15,14 +15,10 @@ var aqiData = {};
 function addAqiData() {
     var cityName = document.getElementById("aqi-city-input").value.trim();
     var quaValue = document.getElementById("aqi-value-input").value.trim();
-    //if(!cityName.match(//)) {
-    //    alert("骚年郎,你输入错误哦")
-    //}
     if(!quaValue.match(/^\d+$/)) {
         alert("骚年郎,你输入错误哦");
         return;
     }
-
     aqiData[cityName] = quaValue;
     console.log(aqiData);
 }
@@ -32,7 +28,7 @@ function addAqiData() {
  */
 function renderAqiList() {
     var table = document.getElementById('aqi-table');
-        table.innerHTML = "<tr><td>城市</td><td>空气质量</td><td>操作</td></tr>"
+        table.innerHTML = "<tr><td>城市</td><td>空气质量</td><td>操作</td></tr>";
     console.log(table);
     for(var cityName in aqiData) {
         table.innerHTML += "<tr><td>" + cityName + "</td><td>" + aqiData[cityName] + "</td><td><button class='del-btn'>删除</button></td></tr>"
@@ -59,8 +55,6 @@ function delBtnHandle() {
     var city = trNode.children[0].innerHTML;
     console.log("gg");
     delete aqiData[city];
-
-
     renderAqiList();
 }
 
@@ -78,8 +72,6 @@ function init() {
     for(var i=0; i<delbtn.length; i++) {
         delbtn[i].onclick = delBtnHandle;
     }
-
-
 }
 
 init();

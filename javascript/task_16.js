@@ -32,9 +32,7 @@ function addAqiData() {
  */
 function renderAqiList() {
     var table = document.getElementById('aqi-table');
-    if(table.innerHTML) {
         table.innerHTML = "<tr><td>城市</td><td>空气质量</td><td>操作</td></tr>"
-    }
     console.log(table);
     for(var cityName in aqiData) {
         table.innerHTML += "<tr><td>" + cityName + "</td><td>" + aqiData[cityName] + "</td><td><button class='del-btn'>删除</button></td></tr>"

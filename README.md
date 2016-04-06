@@ -5,7 +5,7 @@
 - [X] Task-13
 - [X] Task-14
 - [X] Task-15
-- [X] Task-16, 还有个小Bug
+- [X] Task-16 对象好神奇
 - [ ] Task-17
 - [X] Task-18
 - [X] Task-19

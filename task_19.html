@@ -105,8 +105,8 @@
     //左删除
     function leftPop() {
         if(data.length) {
-            var shiftEle = data.shift(data[0]);
-            console.log(data.length);
+            data.shift(data[0]);
+//            console.log(data.length);
             render();
         } else {
             alert("No Element");
@@ -115,8 +115,8 @@
     //右删除
     function rightPop() {
         if(data.length) {
-            var popEle = data.pop(data[data.length - 1]);
-            console.log(data.length);
+            data.pop(data[data.length - 1]);
+//            console.log(data.length);
             render();
         } else {
             alert("No Element");

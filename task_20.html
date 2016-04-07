@@ -18,6 +18,7 @@
         #inputArea {
             resize: none;
         }
+
     </style>
 
 </head>
@@ -27,8 +28,12 @@
 <button id="rightInput">右侧入</button>
 <button id="leftDel">左侧出</button>
 <button id="rightDel">右侧出</button>
-<div id="result"></div>
 
+<label>
+    <input type="text" id="text-search"/>
+    <button id="search">Search</button>
+</label>
+<div id="result"></div>
 <script>
     //类似Jq的选择器
     $ = function(el) {
@@ -41,6 +46,8 @@
     var leftDelBtn = $('#leftDel');
     var rightDelBtn = $('#rightDel');
     var resultDiv = $('#result');
+    var searchText = $('#text-search');
+    var searchBtn = $('#search');
 
     //获取文本框输入数据
     function getInputVal() {
@@ -92,6 +99,12 @@
             alert("No Element");
         }
     }
+
+    function hightlight() {
+        for(var i=0; i< data.length; i++) {
+            data[i].match(/ searchText /);
+        }
+    }
     //渲染矩形列队
     function render() {
         if(data) {
@@ -108,6 +121,7 @@
         rightInputBtn.addEventListener('click', rightInsert);
         leftDelBtn.addEventListener('click', leftPop);
         rightDelBtn.addEventListener('click', rightPop);
+        searchBtn.addEventListener('click', hightlight);
     }
     addHandler();
 </script>

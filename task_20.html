@@ -52,15 +52,13 @@
     //获取文本框输入数据
     function getInputVal() {
         var inputVal = $('#inputArea').value;
-//        console.log(typeof inputVal);
         var splitReg = /[^\u4e00-\u9fa50-9a-zA-Z]+/;
         return inputVal.split(splitReg);
-//        console.log(inputVal.split(splitReg));
     }
 
     //左插入
     function leftInsert() {
-        if(getInputVal()) {
+        if(getInputVal().reverse()) {
 
             for(var j=0; j<getInputVal().length; j++) {
                 data.unshift(getInputVal()[j]);
@@ -103,6 +101,7 @@
     function hightlight() {
         for(var i=0; i< data.length; i++) {
             data[i].match(/ searchText /);
+            console.log(data[i].match(/ searchText /));
         }
     }
     //渲染矩形列队

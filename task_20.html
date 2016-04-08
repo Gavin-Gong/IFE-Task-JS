@@ -51,7 +51,7 @@
 
     //获取文本框输入数据
     function getInputVal() {
-        var inputVal = $('#inputArea').value;
+        var inputVal = $('#inputArea').value.trim();
         var splitReg = /[^\u4e00-\u9fa50-9a-zA-Z]+/;
         return inputVal.split(splitReg);
     }

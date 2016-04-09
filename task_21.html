@@ -5,9 +5,9 @@
     <title>Task-21</title>
     <style>
         body {
-            font-family:  华文细黑;
+            font-family: 华文细黑, sans-serif;
         }
-        #result div {
+        .result div {
             display: inline-block;
             padding: 10px;
             margin-left: 5px;
@@ -26,30 +26,22 @@
 </head>
 <body>
 <textarea id="inputArea" rows="10" cols="50"></textarea>
-<button id="leftInput">左侧入</button>
-<button id="rightInput">右侧入</button>
-<button id="leftDel">左侧出</button>
-<button id="rightDel">右侧出</button>
+<button id="confirmHobby">确认兴趣爱好</button>
 
 <label>
     <input type="text" id="text-search"/>
     <button id="search">Search</button>
 </label>
-<div id="result"></div>
+<div class="result"></div>
 <script>
     //类似Jq的选择器
     $ = function(el) {
         return document.querySelector(el);
     };
-    //定义数据, 数组, 左插入按钮, 右插入按钮, 左删除按钮, 右删除按钮
+
     var data = [];
-    var leftInputBtn = $('#leftInput');
-    var rightInputBtn = $('#rightInput');
-    var leftDelBtn = $('#leftDel');
-    var rightDelBtn = $('#rightDel');
-    var resultDiv = $('#result');
-    var searchText = $('#text-search');
-    var searchBtn = $('#search');
+    var confirmHobbyBtn = $('#confirmHobby');
+    var resultDiv = $('.result');
 
     //获取文本框输入数据
     function getInputVal() {
@@ -57,49 +49,29 @@
         var splitReg = /[^\u4e00-\u9fa50-9a-zA-Z]+/;
         return inputVal.split(splitReg);
     }
-
-    //左插入
-    function leftInsert() {
-        if(getInputVal().reverse().length) {
-
-            for(var j=0; j<getInputVal().length; j++) {
-                data.unshift(getInputVal()[j]);
+    function displayHobby() {
+        var finalResult = unique(getInputVal());
+        console.log(finalResult);
+        for(var j=0; j<finalResult.length; j++) {
+                if(finalResult[j]) {
+                    data.push(finalResult[j]);
+                }
             }
-            render();
-        }
+        render();
     }
-    //右插入
-    function rightInsert() {
-        if(getInputVal().length) {
-            for(var j=0; j<getInputVal().length; j++) {
-                data.push(getInputVal()[j]);
+//不是自己写的数组去重,
+    function unique(arr) {
+        var result = [], hash = {};
+        for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+            if (!hash[elem]) {
+                result.push(elem);
+                hash[elem] = true;
             }
-            render();
         }
-    }
-    //左删除
-    function leftPop() {
-        if(data.length) {
-            var shiftEle = data.shift(data[0]);
-            console.log(data.length);
-            render();
-            alert(shiftEle);
-        } else {
-            alert("No Element");
-        }
-    }
-    //右删除
-    function rightPop() {
-        if(data.length) {
-            var popEle = data.pop(data[data.length - 1]);
-            console.log(data.length);
-            render();
-            alert(popEle);
-        } else {
-            alert("No Element");
-        }
+        return result;
     }
 
+// 未完成高亮
     function hightlight() {
         for(var i=0; i< data.length; i++) {
             data[i].match(/ searchText /);
@@ -108,21 +80,17 @@
     }
     //渲染矩形列队
     function render() {
+        resultDiv.innerHTML = "";
         if(data) {
             console.log(data);
-            resultDiv.innerHTML = "";
-            for(var i = 0; i < data.length; i++) {
-                resultDiv.innerHTML += "<div>" + data[i] + "</div>";
+            for(var i = 0; i < unique(data).length; i++) {
+                resultDiv.innerHTML += "<div>" + unique(data)[i] + "</div>";
             }
         }
     }
     //添加事件函数
     function addHandler() {
-        leftInputBtn.addEventListener('click', leftInsert);
-        rightInputBtn.addEventListener('click', rightInsert);
-        leftDelBtn.addEventListener('click', leftPop);
-        rightDelBtn.addEventListener('click', rightPop);
-        searchBtn.addEventListener('click', hightlight);
+        confirmHobbyBtn.addEventListener('click', displayHobby);
     }
     addHandler();
 </script>

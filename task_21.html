@@ -27,11 +27,6 @@
 <body>
 <textarea id="inputArea" rows="10" cols="50"></textarea>
 <button id="confirmHobby">确认兴趣爱好</button>
-
-<label>
-    <input type="text" id="text-search"/>
-    <button id="search">Search</button>
-</label>
 <div class="result"></div>
 <script>
     //类似Jq的选择器
@@ -50,14 +45,15 @@
         return inputVal.split(splitReg);
     }
     function displayHobby() {
-        var finalResult = unique(getInputVal());
-        console.log(finalResult);
-        for(var j=0; j<finalResult.length; j++) {
-                if(finalResult[j]) {
-                    data.push(finalResult[j]);
+//        console.log(finalResult);
+        data = [];
+        for(var j=0; j<getInputVal().length; j++) {
+                if(getInputVal()[j]) {
+                    data.push(getInputVal()[j]);
                 }
             }
-        render();
+        var finalData = unique(data);
+        render(finalData);
     }
 //不是自己写的数组去重,
     function unique(arr) {
@@ -79,14 +75,17 @@
         }
     }
     //渲染矩形列队
-    function render() {
+    function render(data) {
         resultDiv.innerHTML = "";
         if(data) {
+            if(data>9){
+                data.shift();
+            }
             console.log(data);
             for(var i = 0; i < unique(data).length; i++) {
                 resultDiv.innerHTML += "<div>" + unique(data)[i] + "</div>";
             }
-        }
+        } else{resultDiv.innerHTML = ""; }
     }
     //添加事件函数
     function addHandler() {

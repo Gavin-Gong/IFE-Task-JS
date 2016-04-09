@@ -77,9 +77,13 @@
     //渲染矩形列队
     function render(data) {
         resultDiv.innerHTML = "";
+        var dataLen = data.length;
         if(data) {
-            if(data>9){
-                data.shift();
+            if(data.length>10){
+                for(var g=0; g<dataLen-10; g++){
+                    data.shift();
+                    console.log(data.length);
+                }
             }
             console.log(data);
             for(var i = 0; i < unique(data).length; i++) {

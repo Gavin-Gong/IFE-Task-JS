@@ -60,7 +60,9 @@
     function leftInsert() {
         if(getInputVal().reverse()) {
             for(var j=0; j<getInputVal().length; j++) {
-                data.unshift(getInputVal()[j]);
+                if(getInputVal()[j]) {
+                    data.unshift(getInputVal()[j]);
+                }
             }
             render();
         }
@@ -69,7 +71,9 @@
     function rightInsert() {
         if(getInputVal()) {
             for(var j=0; j<getInputVal().length; j++) {
-                data.push(getInputVal()[j]);
+                if(getInputVal()[j]) {
+                    data.push(getInputVal()[j]);
+                }
             }
             render();
         }

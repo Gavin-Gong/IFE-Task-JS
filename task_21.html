@@ -30,6 +30,9 @@
         #inputArea {
             resize: none;
         }
+        .tag {
+            background: #009688!important;
+        }
 
     </style>
 
@@ -109,25 +112,53 @@
             }
         } else{resultDiv.innerHTML = ""; }
     }
-
+    var tagList = [];
     function tag(event) {
-        var tagList = [];
-        if(/[,\s]+/.test(this.value) || event.keyCode===13) {
-            tagList.push(this.value.replace(/[,\s]+/, ""));
+        var tagName =  this.value.replace(/[,\s]+/, "");
+        if(/[^,\s][,\s]$/.test(this.value) || event.keyCode===13) {
+            tagList.push(tagName);
+            if(tagList.length == unique(tagList).length) {
+                tagRender(tagName);
+                console.log('ee');
+            }
+            tagList = unique(tagList);
             this.value = '';
+            console.log(tagList);
         }
-        tagRender(tagList);
+
+
+
     }
 
     function tagRender(data){
-        for(var i = 0; i < data.length; i++) {
-            tagResult.innerHTML += "<div>" + data[i] + "</div>";
+            tagResult.innerHTML += "<div class='tag'>" + data + "</div>";
+
+    }
+    function addDelBtn(event) {
+        if(event.target && event.target.className.toLowerCase() == 'tag') {
+            console.log('adddelbtn');
+            event.target.innerHTML = '删除' + event.target.innerHTML;
+        }
+    }
+    function delDelBtn(event) {
+        if(event.target && event.target.className.toLowerCase() == 'tag') {
+            console.log('DelBtn');
+            event.target.innerHTML = event.target.innerHTML.replace('删除', '');
+        }
+    }
+    function delTag() {
+        if(event.target && event.target.className.toLowerCase() == 'tag') {
+            console.log('DelBtn');
+            event.target.remove();
         }
     }
     //添加事件函数
     function addHandler() {
         confirmHobbyBtn.addEventListener('click', displayHobby);
         tagInput.addEventListener('keyup',tag);
+        tagResult.addEventListener('mouseover',addDelBtn);
+        tagResult.addEventListener('mouseout',delDelBtn);
+        tagResult.addEventListener('click',delTag);
     }
     addHandler();
 </script>

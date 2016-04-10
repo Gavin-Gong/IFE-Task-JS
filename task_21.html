@@ -7,6 +7,16 @@
         body {
             font-family: 华文细黑, sans-serif;
         }
+        .tagResult div {
+            display: inline-block;
+            padding: 10px;
+            margin-left: 5px;
+            margin-top: 20px;
+            height: 20px;
+            text-align: center;
+            color: #eee;
+            background-color: #f44336;
+        }
         .result div {
             display: inline-block;
             padding: 10px;
@@ -29,6 +39,7 @@
     Tag:<input id="tagInput"type="text"/>
 </lable>
 <br>
+<div class="tagResult"></div>
 <textarea id="inputArea" rows="10" cols="50"></textarea>
 <button id="confirmHobby">确认兴趣爱好</button>
 <div class="result"></div>
@@ -41,6 +52,8 @@
     var data = [];
     var confirmHobbyBtn = $('#confirmHobby');
     var resultDiv = $('.result');
+    var tagInput = $('#tagInput');
+    var tagResult = $('.tagResult');
 
     //获取文本框输入数据
     function getInputVal() {
@@ -59,7 +72,8 @@
         var finalData = unique(data);
         render(finalData);
     }
-//不是自己写的数组去重,
+
+    //不是自己写的数组去重,
     function unique(arr) {
         var result = [], hash = {};
         for (var i = 0, elem; (elem = arr[i]) != null; i++) {
@@ -71,7 +85,7 @@
         return result;
     }
 
-// 未完成高亮
+    // 未完成高亮
     function hightlight() {
         for(var i=0; i< data.length; i++) {
             data[i].match(/ searchText /);
@@ -95,9 +109,25 @@
             }
         } else{resultDiv.innerHTML = ""; }
     }
+
+    function tag(event) {
+        var tagList = [];
+        if(/[,\s]+/.test(this.value) || event.keyCode===13) {
+            tagList.push(this.value.replace(/[,\s]+/, ""));
+            this.value = '';
+        }
+        tagRender(tagList);
+    }
+
+    function tagRender(data){
+        for(var i = 0; i < data.length; i++) {
+            tagResult.innerHTML += "<div>" + data[i] + "</div>";
+        }
+    }
     //添加事件函数
     function addHandler() {
         confirmHobbyBtn.addEventListener('click', displayHobby);
+        tagInput.addEventListener('keyup',tag);
     }
     addHandler();
 </script>

@@ -9,11 +9,11 @@
 - [ ] Task-17
 - [X] Task-18
 - [X] Task-19
-- [ ] Task-20
-- [ ] Task-21
-- [ ] Task-22
-- [ ] Task-23
-- [ ] Task-24
+- [X] Task-20
+- [X] Task-21
+- [X] Task-22
+- [X] Task-23
+- [X] Task-24
 - [ ] Task-25
 - [ ] Task-26
 - [ ] Task-27

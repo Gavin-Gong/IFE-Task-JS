@@ -8,7 +8,7 @@
         addBtn = btns[1],
         delBtn = btns[2],
         resetBtn = btns[3];
-        inputValue = document.getElementsByClassName('input')[0].value;
+        input = document.getElementsByClassName('input')[0];
 
 
     root.addEventListener('dblclick', function(e) {
@@ -28,6 +28,10 @@
             delNode(selectedNodes[i]);
         }
     });
+    addBtn.addEventListener('click', function() {
+
+        addNode(document.getElementsByClassName('bg-color'), input.value);
+    });
 
     function toggleFold(node) {
         var childElements = getChildelements(node);
@@ -45,11 +49,14 @@
         }
     }
 
-    function addNode(node, text) {
+    function addNode(nodes, text) {
         var newNode = document.createElement('div');
         newNode.innerHTML = text.trim();
         if(text) {
-            node.appendChild(newNode);
+            for(var g=0; g<nodes.length; g++) {
+                nodes[g].appendChild(newNode);
+            }
+
         }
     }
     function delNode(node) {

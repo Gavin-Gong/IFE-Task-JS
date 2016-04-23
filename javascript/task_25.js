@@ -2,18 +2,32 @@
     console.log('gg');
     var moudule = document.getElementsByClassName('tree-moudule')[0],
         root = document.querySelector('.root'),
-        btns = document.querySelectorAll('fieldset button'),
+        operator = document.getElementsByClassName('operator')[0],
+        btns = operator.querySelectorAll('button'),
         searchBtn = btns[0],
         addBtn = btns[1],
-        resetBtn = btns[2];
+        delBtn = btns[2],
+        resetBtn = btns[3];
         inputValue = document.getElementsByClassName('input')[0].value;
 
 
-    root.addEventListener('click', function(e) {
+    root.addEventListener('dblclick', function(e) {
     var focusNode = e.target;
     console.log(focusNode);
     toggleFold(focusNode);
-});
+    });
+
+    root.addEventListener('click', function(e) {
+    var focusNode = e.target;
+        color(focusNode);
+    });
+
+    delBtn.addEventListener('click', function() {
+       var selectedNodes = document.getElementsByClassName('bg-color') ;
+        for (var i=0; i<selectedNodes.length; i++) {
+            delNode(selectedNodes[i]);
+        }
+    });
 
     function toggleFold(node) {
         var childElements = getChildelements(node);
@@ -52,6 +66,16 @@
                 }
             }
             return resultNode;
+        }
+    }
+    function color(node) {
+        //var nodes = document.getElementsByClassName('bg-color');
+        var oClassName = node.className;
+        console.log(oClassName.search('bg-color'));
+        if(oClassName.search('bg-color') == -1) {
+            node.className += 'bg-color';
+        } else {
+            node.className = oClassName.replace("bg-color", '');
         }
     }
 

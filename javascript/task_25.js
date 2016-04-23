@@ -9,7 +9,7 @@
         inputValue = document.getElementsByClassName('input')[0].value;
 
 
-moudule.addEventListener('click', function(e) {
+    root.addEventListener('click', function(e) {
     var focusNode = e.target;
     console.log(focusNode);
     toggleFold(focusNode);

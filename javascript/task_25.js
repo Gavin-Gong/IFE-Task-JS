@@ -18,15 +18,17 @@
     function toggleFold(node) {
         var childElements = getChildelements(node);
         var childrenLen = childElements.length;
-            if (childElements[0].style.display == 'block') {
+        if (childrenLen) {
+            if (childElements[0].style.display === 'none') {
                 for (var i = 0; i < childrenLen; i++) {
-                    childElements[i].style.display = 'none';
+                    childElements[i].style.display = 'block';
                 }
             } else {
                 for (var j = 0; j < childrenLen; j++) {
-                    childElements[j].style.display = 'block';
+                    childElements[j].style.display = 'none';
                 }
             }
+        }
     }
 
     function addNode(node, text) {

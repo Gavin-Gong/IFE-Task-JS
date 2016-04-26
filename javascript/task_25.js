@@ -35,16 +35,13 @@
 
     searchBtn.addEventListener('click', function() {
         preOrder(root, stack);
-        console.log(stack);
-        //console.log(stack[6]);
         for(var q=0; q<stack.length; q++) {
-            console.log(stack[q].firstChild.nodeValue);
-            console.log(typeof stack[q].firstChild);
             var selectedText = stack[q].firstChild.nodeValue.trim();
-            console.log(selectedText);
+            if(stack[q].firstChild.parentNode.getAttribute('style')) {
+                stack[q].firstChild.parentNode.setAttribute('style', '');
+            }
             if(selectedText == input.value) {
             stack[q].firstChild.parentNode.style.color = 'green';
-                console.log('g')
             }
         }
         stack=[];

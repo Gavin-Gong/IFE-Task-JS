@@ -12,14 +12,14 @@
 
 
     root.addEventListener('dblclick', function(e) {
-    var focusNode = e.target;
-    console.log(focusNode);
-    toggleFold(focusNode);
+        var focusNode = e.target;
+        console.log(focusNode);
+        toggleFold(focusNode);
     });
 
     root.addEventListener('click', function(e) {
-    var focusNode = e.target;
-        color(focusNode);
+        var focusNode = e.target;
+            color(focusNode);
     });
 
     delBtn.addEventListener('click', function() {
@@ -28,9 +28,26 @@
             delNode(selectedNodes[i]);
         }
     });
-    addBtn.addEventListener('click', function() {
 
+    addBtn.addEventListener('click', function() {
         addNode(document.getElementsByClassName('bg-color'), input.value);
+    });
+
+    searchBtn.addEventListener('click', function() {
+        preOrder(root, stack);
+        console.log(stack);
+        //console.log(stack[6]);
+        for(var q=0; q<stack.length; q++) {
+            console.log(stack[q].firstChild.nodeValue);
+            console.log(typeof stack[q].firstChild);
+            var selectedText = stack[q].firstChild.nodeValue.trim();
+            console.log(selectedText);
+            if(selectedText == input.value) {
+            stack[q].firstChild.parentNode.style.color = 'green';
+                console.log('g')
+            }
+        }
+        stack=[];
     });
 
     function toggleFold(node) {
@@ -48,7 +65,6 @@
             }
         }
     }
-
     function addNode(nodes, text) {
         var newNode = document.createElement('div');
         newNode.innerHTML = text.trim();
@@ -83,6 +99,16 @@
             node.className += 'bg-color';
         } else {
             node.className = oClassName.replace("bg-color", '');
+        }
+    }
+
+    var stack = [];
+    function preOrder(node, stack) {
+        var tempNode = node.firstElementChild || null;
+        stack.push(node);
+        while(tempNode) {
+            preOrder(tempNode, stack);
+            tempNode = tempNode.nextElementSibling;
         }
     }
 

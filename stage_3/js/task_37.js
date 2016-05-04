@@ -6,7 +6,8 @@
     var maskTrigger = document.getElementsByClassName('mask-trigger')[0];
 
 function maskLayer(ele) {
-    ele.style.height = window.innerHeight + "px"; //resize 时候触发此事件
+
+
     return {
         show: function() {
             ele.style.display = 'block';
@@ -23,6 +24,10 @@ maskEle.addEventListener('click', function(e) {
         maskLayer(maskEle).hide();
     }
 });
+
+window.onresize = function() {
+    maskEle.style.height = window.innerHeight + "px"; //resize 时候触发此事件
+};
 
 
 

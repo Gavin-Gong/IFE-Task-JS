@@ -6,33 +6,24 @@
     var maskTrigger = document.getElementsByClassName('mask-trigger')[0];
 
 function maskLayer(ele) {
-    //this.ele = ele;
-    ele.style.height = window.innerHeight + "px";
+    ele.style.height = window.innerHeight + "px"; //resize 时候触发此事件
     return {
         show: function() {
             ele.style.display = 'block';
-            alert('block');
         },
         hide: function() {
             ele.style.display = "none";
-            alert('hide')
         }
-
     }
 }
 
 maskTrigger.addEventListener('click', maskLayer(maskEle).show, false);
-
-//maskTrigger.addEventListener('click', maskLayer.show(), false);
 maskEle.addEventListener('click', function(e) {
     if(e.target.className == "mask-layer") {
         maskLayer(maskEle).hide();
     }
 });
 
-//maskTrigger.addEventListener('click', showMask(maskEle));
-//maskTrigger.addEventListener('click', maskLayer.hide());
-//maskLayer.addEventListener('click', maskLayer.hide(), false);
 
 
 

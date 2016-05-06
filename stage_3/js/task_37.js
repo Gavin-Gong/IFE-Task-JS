@@ -15,17 +15,18 @@ function maskLayer(ele, trigger) {
     function setHeight() {
         ele.style.height = window.innerHeight + "px";
     }
-
     ele.addEventListener('click', function(e) {
         if(e.target = ele) {
             hide();
         }
     });
+    setHeight();
     trigger.addEventListener('click', show, false);
     window.addEventListener('resize', setHeight, false);
 }
 
 maskLayer(maskEle, maskTrigger);
+
 
 
 

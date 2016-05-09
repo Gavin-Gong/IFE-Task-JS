@@ -6,6 +6,6 @@
 // canvas
 
 var SCREEN_HEIGHT = 650,
-    SCREEN_WIDTH = 200,
+    SCREEN_WIDTH = 200;
 
 

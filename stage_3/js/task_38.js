@@ -38,14 +38,28 @@ TableUtil.prototype = {
         this.tableEle.appendChild(tbody);
 
         // Append Data
-        for(var row=0; row< this.rows; row++) {
-            tbody.insertRow(row);
-            for(var col=0; col<this.cols; col++) {
-                tbody.rows[row].insertCell(col);
-                tbody.rows[row].cells[col].appendChild(this.data.row1);  //Some Bugs To Fix
+        //for(var row=0; row< this.rows; row++) {
+        //    tbody.insertRow(row);
+        //    for(var col=0; col<this.cols; col++) {
+        //        tbody.rows[row].insertCell(col);
+        //        tbody.rows[row].cells[col].appendChild(this.data.row1);  //Some Bugs To Fix
+        //    }
+
+        for(var key in this.data) {
+            var row = 0;
+            tbody.insertRow(row++);
+            if(key != 'head') {
+                for (var col=0; col<this.cols; col++) {
+                    tbody.rows[row-1].insertCell(col);
+                    tbody.rows[row-1].cells[col].innerHTML = this.data[key][col];
+
+
+                }
             }
+
         }
     },
+
 
     sortTable: function() {
 
@@ -78,7 +92,7 @@ var tableData = {
             row4: [1,2,3,4]
     },
     disableSortCol: [1,2],
-    defaultSortCol: [3, 'sb']
+    defaultSortCol: [3, 'sb'] // col:3, Small --> Big
 };
 
 var newTable = new TableUtil(tableData);

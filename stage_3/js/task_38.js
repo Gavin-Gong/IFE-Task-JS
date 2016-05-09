@@ -26,40 +26,46 @@ TableUtil.prototype = {
         }
     },
     addArrow: function() {
-        function addUpArrow() {
-
+        var self = this;
+        function addUpArrow(ele) {
+            var upArrow = document.createElement("div");
+            upArrow.style.cssText= 'position:absolute; top:10px; right:10px;width: 10px; height: 10px; background: #f44336';
+            ele.appendChild(upArrow);
         }
-        function addDownArrow() {}
+        function addDownArrow(ele) {
+            var downArrow = document.createElement("div");
+            downArrow.style.cssText= 'position:absolute; top:10px; right:10px;width: 10px; height: 10px; background: #f44336';
+            ele.appendChild(downArrow);
+        }
+        for(var f=0; f<self.cols; f++) {
+            var arrowEle = self.tableEle.tHead.rows[0].cells[f];
+            //var disableArrow = self.tableEle.tHead.rows[0].cells[].
+            if(arrowEle) {
+                    addDownArrow(arrowEle);
+                    addUpArrow(arrowEle);
+                }
+            }
+
 
     },
     addTbody: function() {
         // Create Table Body
-        var tbody =document.createElement("tbody");
+        var tbody = document.createElement("tbody");
         this.tableEle.appendChild(tbody);
 
         // Append Data
-        //for(var row=0; row< this.rows; row++) {
-        //    tbody.insertRow(row);
-        //    for(var col=0; col<this.cols; col++) {
-        //        tbody.rows[row].insertCell(col);
-        //        tbody.rows[row].cells[col].appendChild(this.data.row1);  //Some Bugs To Fix
-        //    }
-
+        var row = 0;
         for(var key in this.data) {
-            var row = 0;
+
             tbody.insertRow(row++);
             if(key != 'head') {
                 for (var col=0; col<this.cols; col++) {
                     tbody.rows[row-1].insertCell(col);
                     tbody.rows[row-1].cells[col].innerHTML = this.data[key][col];
-
-
                 }
             }
-
         }
     },
-
 
     sortTable: function() {
 
@@ -68,15 +74,22 @@ TableUtil.prototype = {
     tableRender: function() {
         // Set Table Basic Style
         this.tableEle.border = 1;
-        this.tableEle.width = '80%';
-        this.tableEle.tHead.style.backgroundColor = 'black';
+        this.tableEle.width = '40%';
+        this.tableEle.tHead.style.backgroundColor = '#333';
         this.tableEle.tHead.style.color = 'white';
+
+        // Set Cell position:relative
+        var headTdEle = this.tableEle.tHead.getElementsByTagName('td');
+        for(var g=0; g<this.cols; g++) {
+            headTdEle[g].style.position = 'relative';
+        }
     },
 
     init: function() {
         this.addThead();
         this.addTbody();
         this.tableRender();
+        this.addArrow();
     }
 };
 
@@ -86,10 +99,10 @@ var tableData = {
     cols: 4,
     rows: 5,
     data: { head: ['Q','W','E','R'],
-            row1: [1,2,3,4],
-            row2: [1,2,3,4],
-            row3: [1,2,3,4],
-            row4: [1,2,3,4]
+            row1: [1,33,3,42],
+            row2: [5,7,43,46],
+            row3: [7,4,65,54],
+            row4: [2,6,12,32]
     },
     disableSortCol: [1,2],
     defaultSortCol: [3, 'sb'] // col:3, Small --> Big

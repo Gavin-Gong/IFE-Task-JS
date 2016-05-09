@@ -29,12 +29,12 @@ TableUtil.prototype = {
         var self = this;
         function addUpArrow(ele) {
             var upArrow = document.createElement("div");
-            upArrow.style.cssText= 'position:absolute; top:10px; right:10px;width: 10px; height: 10px; background: #f44336';
+            upArrow.style.cssText= 'position:absolute; top:18px; right:10px; border: 8px solid transparent; border-top: 8px solid #f44336';
             ele.appendChild(upArrow);
         }
         function addDownArrow(ele) {
             var downArrow = document.createElement("div");
-            downArrow.style.cssText= 'position:absolute; top:10px; right:10px;width: 10px; height: 10px; background: #f44336';
+            downArrow.style.cssText= 'position:absolute; top:-5px; right:10px;border: 8px solid transparent; border-bottom: 8px solid #f44336';
             ele.appendChild(downArrow);
         }
         for(var f=0; f<self.cols; f++) {

@@ -29,12 +29,12 @@ TableUtil.prototype = {
         var self = this;
         function addUpArrow(ele) {
             var upArrow = document.createElement("div");
-            upArrow.style.cssText= 'position:absolute; top:18px; right:10px; border: 8px solid transparent; border-top: 8px solid #f44336';
+            upArrow.style.cssText= 'position:absolute; top: 23px; right:10px; border: 8px solid transparent; border-top: 8px solid #f44336';
             ele.appendChild(upArrow);
         }
         function addDownArrow(ele) {
             var downArrow = document.createElement("div");
-            downArrow.style.cssText= 'position:absolute; top:-5px; right:10px;border: 8px solid transparent; border-bottom: 8px solid #f44336';
+            downArrow.style.cssText= 'position:absolute; top: 0px; right:10px;border: 8px solid transparent; border-bottom: 8px solid #f44336';
             ele.appendChild(downArrow);
         }
         for(var f=0; f<self.cols; f++) {
@@ -76,7 +76,40 @@ TableUtil.prototype = {
     },
 
     sortTable: function() {
+        var self = this;
 
+
+        // Small --> Big,
+        // colNum 要进行排序的列数
+        function SBSort(colNum) {
+            var colArr = [];
+            var tempRow = null;
+            var tBodies = self.tableEle.tBodies;
+            for(var x=0; x<self.rows-1; x++) {
+                //colArr.push();
+                var preRow = tBodies.rows[x].cells[colNum+1].innerText;
+                var nextRow = tBodies.rows[x+1].cells[colNum+1].innerText;
+                if(preRow > nextRow){
+                    tBodies.insertRow(x);
+                }
+            }
+        }
+        // Big --> Small
+        function BSSort(colNum) {
+
+        }
+
+        function exchangeRow(preRow, nextRow, colNum) {
+            // exchange
+            var tempPreRow = nextRow;
+            var tempNextRow = preRow;
+            // delete Row
+            self.tableEle.tBodies.deleteRow(colNum);
+            self.tableEle.tBodies.deleteRow(colNum+1);
+
+            self.tableEle.tBodies.insertRow(colNum).appendChild(tempPreRow.innerHTML);
+            self.tableEle.tBodies.insertRow(colNum+1).appendChild(tempNextRow.innerHTML);
+        }
     },
 
     tableRender: function() {
@@ -85,6 +118,7 @@ TableUtil.prototype = {
         this.tableEle.width = '40%';
         this.tableEle.tHead.style.backgroundColor = '#333';
         this.tableEle.tHead.style.color = 'white';
+        this.tableEle.cellPadding = '10';
 
         // Set Cell position:relative
         var headTdEle = this.tableEle.tHead.getElementsByTagName('td');

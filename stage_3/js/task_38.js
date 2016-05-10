@@ -38,13 +38,21 @@ TableUtil.prototype = {
             ele.appendChild(downArrow);
         }
         for(var f=0; f<self.cols; f++) {
+            // state 标记状态，若为self.disableSortCol.length 则说明添加箭头
+            var state = 0;
             var arrowEle = self.tableEle.tHead.rows[0].cells[f];
             //var disableArrow = self.tableEle.tHead.rows[0].cells[].
-            if(arrowEle) {
-                    addDownArrow(arrowEle);
-                    addUpArrow(arrowEle);
+            for(var j=0; j<self.disableSortCol.length; j++) {
+                if(arrowEle && (self.disableSortCol[j] != (f+1))) {
+                    state ++;
                 }
             }
+            if(state == self.disableSortCol.length) {
+                addDownArrow(arrowEle);
+                addUpArrow(arrowEle);
+            }
+        }
+
 
 
     },
